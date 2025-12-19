@@ -13,7 +13,7 @@ export function FloodEffect({ weatherType, onWaterLevelChange }: FloodEffectProp
   const [isDraining, setIsDraining] = useState(false);
   
   // Different flood heights for rain vs storm
-  const maxFloodPercent = weatherType === 'thunderstorm' ? 100 : weatherType === 'rainy' ? 15 : 0;
+  const maxFloodPercent = weatherType === 'thunderstorm' ? 100 : weatherType === 'rainy' ? 100 : 0;
   
   // Notify parent component of water level changes
   useEffect(() => {
@@ -160,7 +160,7 @@ export function FloodEffect({ weatherType, onWaterLevelChange }: FloodEffectProp
             className={`pixel-button px-6 py-3 ${isDraining ? 'bg-blue-500/30 border-blue-400/70' : 'bg-red-500/30 border-red-400/70'}`}
           >
             <span className="pixel-text-xs">
-              {isDraining ? '🔓 DRAINING...' : '🚰 DRAIN WATER'}
+              {isDraining ? '🕳️ DRAINING...' : '🚰 DRAIN WATER'}
             </span>
           </button>
         </div>
