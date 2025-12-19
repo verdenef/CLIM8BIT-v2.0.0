@@ -218,7 +218,7 @@ CLIM8BIT/
 - **React 19** - UI library with hooks
 - **TypeScript 5+** - Type safety
 - **Tailwind CSS v4** - Utility-first styling
-- **HTML5 Canvas** - Particle animations (rain, fog)
+- **CSS Animations** - GPU-accelerated particle animations (rain, snow, wind, fog)
 - **Inertia.js 2.0** - SPA adapter (no API calls needed)
 - **Vite 7** - Build tool and dev server
 
@@ -271,13 +271,14 @@ CLIM8BIT/
 - Manual phase selector in demo mode
 ```
 
-#### 3. Canvas Particle Systems
+#### 3. CSS Animation Particle Systems
 ```typescript
-// Efficient rendering of:
-- 150 raindrops simultaneously
-- 60 snowflakes with individual properties
-- Particle recycling (no garbage collection)
-- requestAnimationFrame for smooth 60fps
+// GPU-accelerated rendering of:
+- 150+ raindrops simultaneously
+- 60+ snowflakes with individual properties
+- Particle creation once, CSS handles infinite loops
+- Zero JavaScript execution during animation
+- requestAnimationFrame only for cursor physics (SlipperyCursor.tsx)
 ```
 
 ---
@@ -292,9 +293,9 @@ CLIM8BIT/
 - **Responsive** on mobile and desktop
 
 ### Optimizations
-- ✅ RequestAnimationFrame instead of setInterval
-- ✅ Particle object pooling
-- ✅ Canvas dirty region optimization
+- ✅ CSS animations (GPU-accelerated, zero JS overhead)
+- ✅ RequestAnimationFrame for cursor physics only
+- ✅ Particle creation once, CSS handles infinite loops
 - ✅ Conditional effect rendering
 - ✅ API response caching (10 minutes)
 - ✅ Debounced search input (300ms)

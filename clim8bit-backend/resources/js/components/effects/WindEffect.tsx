@@ -12,9 +12,10 @@ interface WindStreak {
 
 interface WindEffectProps {
   windSpeed?: number; // km/h
+  fadeOut?: boolean; // Fade out when transitioning
 }
 
-export function WindEffect({ windSpeed = 30 }: WindEffectProps) {
+export function WindEffect({ windSpeed = 30, fadeOut = false }: WindEffectProps) {
   const [windStreaks, setWindStreaks] = useState<WindStreak[]>([]);
 
   // Calculate duration based on wind speed
@@ -45,7 +46,13 @@ export function WindEffect({ windSpeed = 30 }: WindEffectProps) {
   }, [windSpeed, baseDuration]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-10 overflow-hidden">
+    <div 
+      className="fixed inset-0 pointer-events-none z-10 overflow-hidden"
+      style={{
+        opacity: fadeOut ? 0 : 1,
+        transition: fadeOut ? 'opacity 2s ease-out' : 'none',
+      }}
+    >
       {windStreaks.map((streak) => (
         <div
           key={streak.id}

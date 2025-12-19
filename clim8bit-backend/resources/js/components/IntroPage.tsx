@@ -223,7 +223,7 @@ export function IntroPage({
               {/* Slightly lower windSpeed here so intro leaves aren't too fast */}
               <LeavesEffect windSpeed={15} fadeOut={isInTransition()} />
             </div>
-            <WindEffect windSpeed={35} />
+            <WindEffect windSpeed={35} fadeOut={isInTransition()} />
           </>
         )}
 
