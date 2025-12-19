@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { RainEffect } from "./effects/RainEffect";
-import { RainEffectContained } from "./effects/RainEffectContained";
 import { SnowEffect } from "./effects/SnowEffect";
 import { CloudsEffect } from "./effects/CloudsEffect";
 import { LeavesEffect } from "./effects/LeavesEffect";
