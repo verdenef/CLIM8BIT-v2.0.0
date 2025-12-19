@@ -20,6 +20,16 @@ import { FeaturesModal } from "./FeaturesModal";
 import { SnowPanel } from "./ui/SnowPanel";
 import type { WeatherType } from "@/Pages/Weather/Index";
 import { searchCities } from "@/Utils/cities";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
 
 interface SearchBarProps {
   onSearch: (city: string) => void;
@@ -91,6 +101,7 @@ export function SearchBar({
   const [showFeaturesModal, setShowFeaturesModal] = useState(false);
   const [autocompleteResults, setAutocompleteResults] = useState<string[]>([]);
   const [showAutocomplete, setShowAutocomplete] = useState(false);
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
   const { user, logout } = useAuth();
   const {
     isFavorite,
@@ -204,7 +215,7 @@ export function SearchBar({
                           : "/assets/images/icons/gravityOff.png"
                       }
                       alt={cursorPhysicsEnabled ? "Disable gravity physics" : "Enable gravity physics"}
-                      className="w-4 h-4 object-contain pixel-icon"
+                      className="w-6 h-6 object-contain pixel-icon"
                       style={{ imageRendering: "pixelated" }}
                     />
                   </button>
@@ -238,12 +249,43 @@ export function SearchBar({
                           <Settings size={14} className="pixel-icon" />
                         </button>
                         <button
-                          onClick={logout}
+                          onClick={() => setShowLogoutDialog(true)}
                           className="pixel-button px-3 py-2"
                           title="Logout"
                         >
                           <LogOut size={14} className="pixel-icon" />
                         </button>
+                        
+                        <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
+                          <AlertDialogContent className="bg-black/95 border-2 border-white/30">
+                            <AlertDialogHeader>
+                              <AlertDialogTitle className="pixel-title text-white text-lg">
+                                CONFIRM LOGOUT
+                              </AlertDialogTitle>
+                              <AlertDialogDescription className="pixel-text-xs text-white/80 mt-2">
+                                Are you sure you want to logout?
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter className="mt-4 gap-2">
+                              <AlertDialogCancel 
+                                onClick={() => setShowLogoutDialog(false)}
+                                className="pixel-button bg-white/10 hover:bg-white/20 text-white border-white/30"
+                              >
+                                CANCEL
+                              </AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={async () => {
+                                  setShowLogoutDialog(false);
+                                  await logout();
+                                  window.location.reload();
+                                }}
+                                className="pixel-button bg-red-600 hover:bg-red-700 text-white"
+                              >
+                                LOGOUT
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </div>
                     ) : (
                       <button
