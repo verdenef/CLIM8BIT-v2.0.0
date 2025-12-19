@@ -1,0 +1,65 @@
+# Guides folder (excluded as requested)
+guides/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+.fleet/
+.nova/
+.zed/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.backup
+.env.production
+.env.local
+
+# Node modules (all locations)
+node_modules/
+**/node_modules/
+
+# PHP dependencies
+vendor/
+**/vendor/
+
+# Build artifacts
+dist/
+build/
+**/build/
+*.min.js
+*.min.css
+
+# Laravel specific
+storage/*.key
+storage/logs/*.log
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+!storage/framework/cache/.gitignore
+!storage/framework/sessions/.gitignore
+!storage/framework/views/.gitignore
+bootstrap/cache/*
+!bootstrap/cache/.gitignore
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+

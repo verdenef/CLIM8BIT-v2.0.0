@@ -1,0 +1,894 @@
+@import "tailwindcss";
+
+/* Import Pixel Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Pixel-Perfect Rendering */
+* {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Global pixel font */
+body {
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Pixel Text Styles */
+.pixel-text-xs {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  line-height: 1.6;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.pixel-text-sm {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  line-height: 1.6;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.pixel-text-lg {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
+  line-height: 1.6;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.pixel-text-xl {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  line-height: 1.6;
+  text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+}
+
+.pixel-text-huge {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 64px;
+  line-height: 1.2;
+  text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+.pixel-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 32px;
+  line-height: 1.4;
+  text-shadow: 
+    4px 4px 0px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 40px rgba(100, 200, 255, 0.2);
+  animation: titleGlow 3s ease-in-out infinite;
+  letter-spacing: 0.1em;
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    text-shadow: 
+      4px 4px 0px rgba(0, 0, 0, 0.8),
+      0 0 20px rgba(255, 255, 255, 0.3),
+      0 0 40px rgba(100, 200, 255, 0.2);
+  }
+  50% {
+    text-shadow: 
+      4px 4px 0px rgba(0, 0, 0, 0.8),
+      0 0 30px rgba(255, 255, 255, 0.5),
+      0 0 60px rgba(100, 200, 255, 0.4);
+  }
+}
+
+/* Gentle Pulse Animation - Subtle opacity change */
+@keyframes gentlePulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: 768px) {
+  .pixel-text-huge {
+    font-size: 48px;
+  }
+  
+  .pixel-title {
+    font-size: 24px;
+  }
+}
+
+/* Pixel Panel - Transparent/Blurry */
+.pixel-panel {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: visible; /* Allow snow to pile on top */
+}
+
+/* Wet Panel Effect */
+.wet-panel {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(100, 150, 255, 0.4);
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 
+    inset 0 0 20px rgba(100, 150, 255, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(100, 150, 255, 0.2);
+}
+
+/* Moist Panel (Snow) */
+.moist-panel {
+  background: rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(200, 220, 255, 0.3);
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Water Droplets on Panels */
+.water-droplet {
+  position: absolute;
+  top: -4px;
+  width: 4px;
+  height: 4px;
+  background: rgba(150, 200, 255, 0.8);
+  border-radius: 50%;
+  animation: dropletFall 3s linear infinite;
+  box-shadow: 0 0 4px rgba(150, 200, 255, 0.6);
+}
+
+@keyframes dropletFall {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Pixel Button */
+.pixel-button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  
+  /* Rounded corners */
+  border: 0;
+  border-radius: 8px;
+  
+  /* Natural realistic border and shadows */
+  box-shadow: 
+    /* Outer light border */
+    0 0 0 2px rgba(255, 255, 255, 0.25),
+    /* Top-left highlight for depth */
+    inset 1px 1px 0 0 rgba(255, 255, 255, 0.4),
+    /* Bottom-right soft shadow */
+    inset -1px -1px 0 0 rgba(0, 0, 0, 0.3),
+    /* Outer soft shadow for elevation */
+    0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Pixel Input */
+.pixel-input {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  outline: none;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 0 0 rgba(255, 255, 255, 0);
+}
+
+.pixel-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.pixel-input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.pixel-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pixel-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.35),
+    inset 1px 1px 0 0 rgba(255, 255, 255, 0.5),
+    inset -1px -1px 0 0 rgba(0, 0, 0, 0.3),
+    0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+.pixel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pixel-button:disabled:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: none;
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.25),
+    inset 1px 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset -1px -1px 0 0 rgba(0, 0, 0, 0.3),
+    0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.pixel-button-active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(1px);
+  box-shadow: 
+    0 0 0 2px rgba(255, 255, 255, 0.3),
+    /* Inverted shadows for pressed effect */
+    inset -1px -1px 0 0 rgba(255, 255, 255, 0.3),
+    inset 1px 1px 0 0 rgba(0, 0, 0, 0.4),
+    inset 0 0 12px rgba(0, 0, 0, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Wet Button Effect */
+.wet-button {
+  background: rgba(100, 150, 255, 0.2);
+  border-color: rgba(100, 150, 255, 0.4);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 0 12px rgba(100, 150, 255, 0.3);
+}
+
+/* Water Drops from Buttons */
+.water-drop-from-button {
+  position: absolute;
+  width: 3px;
+  height: 6px;
+  background: rgba(150, 200, 255, 0.8);
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+  animation: buttonDrop 2s ease-in infinite;
+  box-shadow: 0 0 3px rgba(150, 200, 255, 0.6);
+}
+
+@keyframes buttonDrop {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+
+/* Rain Effect */
+.raindrop {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(transparent, rgba(200, 220, 255, 0.8));
+  animation: rainFall 1s linear infinite;
+  top: -20px;
+}
+
+@keyframes rainFall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* Windy Rain Effect */
+.raindrop-windy {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(transparent, rgba(200, 220, 255, 0.8));
+  animation: rainWindy 1s linear infinite;
+  top: -20px;
+}
+
+@keyframes rainWindy {
+  to {
+    transform: translateY(100vh) translateX(150px);
+  }
+}
+
+/* Snow Effect */
+.snowflake {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: snowFall 5s linear infinite;
+  top: -10px;
+  opacity: 0.9;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes snowFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) translateX(50px) rotate(360deg);
+  }
+}
+
+/* Windy Snow Effect */
+.snowflake-windy {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: snowWindy 5s linear infinite;
+  top: -10px;
+  opacity: 0.9;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes snowWindy {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) translateX(200px) rotate(720deg);
+  }
+}
+
+/* Lightning Flash */
+.lightning-flash {
+  animation: flash 0.1s ease-out;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.8; }
+}
+
+/* Sun Rays */
+.sun-ray {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 100px;
+  background: linear-gradient(rgba(255, 215, 0, 0.6), transparent);
+  animation: sunRayRotate 20s linear infinite;
+}
+
+/* Wide Sun Rays - rotating around sun edges */
+.wide-sun-ray {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 80px;
+  margin-left: -8px;
+  margin-top: -40px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 215, 0, 0.4) 30%,
+    rgba(255, 235, 59, 0.6) 50%,
+    rgba(255, 215, 0, 0.4) 70%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+@keyframes sunRayRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Heat Waves */
+.heat-wave {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 100, 0, 0.1) 25%,
+    rgba(255, 150, 0, 0.15) 50%,
+    rgba(255, 100, 0, 0.1) 75%,
+    transparent 100%
+  );
+  animation: heatWave 4s ease-in-out infinite;
+  filter: blur(4px);
+}
+
+@keyframes heatWave {
+  0%, 100% {
+    transform: translateX(-20%) scaleY(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(20%) scaleY(1.2);
+    opacity: 0.5;
+  }
+}
+
+/* Fog Effect */
+.fog-layer {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(180, 180, 200, 0.4) 25%,
+    rgba(180, 180, 200, 0.6) 50%,
+    rgba(180, 180, 200, 0.4) 75%,
+    transparent 100%
+  );
+  animation: fogMove 30s linear infinite;
+  filter: blur(20px);
+}
+
+@keyframes fogMove {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+/* Leaves Effect */
+.leaf {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(100, 150, 50, 0.7);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  animation: leafFall 8s ease-in infinite;
+  top: -10px;
+}
+
+@keyframes leafFall {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px) rotate(360deg);
+  }
+}
+
+/* Windy Leaves Effect */
+.leaf-windy {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(100, 150, 50, 0.7);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  animation: leafWindy 3s linear infinite;
+  top: -10px;
+}
+
+@keyframes leafWindy {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) translateX(200px) rotate(720deg);
+  }
+}
+
+/* Stars Effect */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: starTwinkle 3s ease-in-out infinite;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes starTwinkle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+/* Gentle Sun Rays */
+.gentle-sun-ray {
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255, 235, 59, 0.4), transparent);
+  animation: gentleSunRay 4s ease-in-out infinite;
+}
+
+@keyframes gentleSunRay {
+  0%, 100% {
+    opacity: 0.6;
+    height: 40px;
+  }
+  50% {
+    opacity: 0.3;
+    height: 50px;
+  }
+}
+
+/* Light Particles for Clear Weather */
+.light-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+  border-radius: 50%;
+  animation: floatParticle 6s ease-in-out infinite;
+}
+
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+/* Pixel Clouds */
+.pixel-cloud {
+  position: absolute;
+  animation: cloudMove 30s linear infinite;
+  will-change: transform;
+}
+
+.cloud-pixel-part {
+  position: absolute;
+  background: inherit;
+}
+
+@keyframes cloudMove {
+  from {
+    transform: translateX(-120px);
+  }
+  to {
+    transform: translateX(calc(100vw + 120px));
+  }
+}
+
+/* Flood Effect */
+.flood-water {
+  height: 120px;
+  background: linear-gradient(
+    to bottom,
+    rgba(50, 100, 200, 0.3),
+    rgba(30, 80, 180, 0.5)
+  );
+  position: relative;
+  overflow: hidden;
+  animation: floodRise 3s ease-out forwards;
+}
+
+@keyframes floodRise {
+  from {
+    height: 0;
+  }
+  to {
+    height: 120px;
+  }
+}
+
+.flood-wave {
+  position: absolute;
+  top: 0;
+  width: 200%;
+  height: 20px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100, 150, 255, 0.4),
+    transparent
+  );
+  animation: waveMove 3s ease-in-out infinite;
+}
+
+@keyframes waveMove {
+  0%, 100% {
+    transform: translateX(-25%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+}
+
+.water-ripple {
+  position: absolute;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(150, 200, 255, 0.5);
+  border-radius: 50%;
+  animation: ripple 2s ease-out infinite;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* Pixel Icons */
+.pixel-icon {
+  filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.5));
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.pixel-icon-large {
+  filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.5));
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Pixelize all lucide-react SVG icons that don't have pixel art replacements */
+svg[class*="lucide"] {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  filter: contrast(1.2) drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.3));
+}
+
+.pixel-icon-wrapper {
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Pixel Border */
+.pixel-border-bottom {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Pixel Render */
+.pixel-render {
+  shape-rendering: crispEdges;
+}
+
+/* Reset and Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', cursive;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Intro Page Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* White Flash Effect - Flashback transition */
+@keyframes whiteFlash {
+  0% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  20% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  40% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  60% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  80% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.animate-fadeOut {
+  animation: fadeOut 0.6s ease-in-out forwards;
+}
+
+.animate-whiteFlash {
+  animation: whiteFlash 1.0s ease-in-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Pixel Art Toast Styles - Matching ErrorBanner exactly */
+.pixel-toast [data-sonner-toaster] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 60 !important;
+  width: 100% !important;
+  max-width: 42rem !important;
+  padding: 0 16px !important;
+}
+
+.pixel-toast [data-sonner-toast-list] {
+  margin-top: 16px !important;
+}
+
+.pixel-toast [data-sonner-toast] {
+  /* Match pixel-panel class exactly */
+  background: rgba(0, 0, 0, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 16px !important;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.3) !important;
+  position: relative !important;
+  transition: all 0.3s ease !important;
+  overflow: visible !important;
+  padding: 16px !important;
+  margin: 0 !important;
+  min-height: auto !important;
+  font-family: 'Press Start 2P', cursive !important;
+}
+
+/* Toast content wrapper - match flex items-start gap-4 */
+.pixel-toast [data-sonner-toast] > div {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 16px !important;
+}
+
+/* Toast title - match pixel-text-sm text-white/90 mb-2 */
+.pixel-toast [data-sonner-toast] [data-title] {
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 10px !important;
+  line-height: 1.6 !important;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin: 4px 0 8px 0 !important;
+}
+
+/* Toast description - match pixel-text-xs text-white/80 leading-relaxed */
+.pixel-toast [data-sonner-toast] [data-description] {
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 8px !important;
+  line-height: 1.6 !important;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin: 4px 0 0 0 !important;
+}
+
+/* Icon styling - match w-6 h-6 text-white/70 */
+.pixel-toast [data-sonner-toast] [data-icon] {
+  width: 24px !important;
+  height: 24px !important;
+  flex-shrink: 0 !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  margin-top: 4px !important;
+}
+
+/* Close button */
+.pixel-toast [data-sonner-toast] [data-close-button] {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-family: 'Press Start 2P', cursive !important;
+  font-size: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  padding: 4px 8px !important;
+  border-radius: 0 !important;
+}
+
+.pixel-toast [data-sonner-toast] [data-close-button]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
