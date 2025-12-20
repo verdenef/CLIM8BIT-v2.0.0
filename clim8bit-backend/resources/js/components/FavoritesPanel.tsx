@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import {
   Star,
   Trash2,
+  Edit2,
 } from "lucide-react";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useAuth } from "@/hooks/useAuth";
@@ -726,10 +727,12 @@ export function FavoritesPanel({
     }
     return Math.round(celsius);
   };
-  const { favorites, removeFavorite } = useFavorites();
+  const { favorites, removeFavorite, updateNickname } = useFavorites();
   const [weatherData, setWeatherData] = useState<
     WeatherWidgetData[]
   >([]);
+  const [editingNickname, setEditingNickname] = useState<string | null>(null);
+  const [nicknameValues, setNicknameValues] = useState<Record<string, string>>({});
 
   // Fetch weather for all favorites
   useEffect(() => {
@@ -947,17 +950,71 @@ export function FavoritesPanel({
                 </button>
               )}
 
-              {/* City name */}
+              {/* City name and nickname */}
               <div className="mb-3">
                 <button
                   onClick={() =>
                     !demoMode && onCitySelect(widget.city)
                   }
                   disabled={demoMode}
-                  className="pixel-text-xs text-white hover:text-yellow-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-left"
+                  className="pixel-text-xs text-white hover:text-yellow-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-left block mb-1"
                 >
                   {widget.city}, {widget.country}
                 </button>
+                
+                {/* Nickname input */}
+                {!demoMode && (
+                  <div className="flex items-center gap-2">
+                    {editingNickname === widget.id ? (
+                      <input
+                        type="text"
+                        value={nicknameValues[widget.id] || ''}
+                        onChange={(e) => setNicknameValues(prev => ({ ...prev, [widget.id]: e.target.value }))}
+                        onBlur={async () => {
+                          const favorite = favorites.find(f => f.id === widget.id);
+                          const newNickname = nicknameValues[widget.id]?.trim() || null;
+                          if (favorite && favorite.nickname !== newNickname) {
+                            await updateNickname(widget.id, newNickname);
+                          }
+                          setEditingNickname(null);
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            e.currentTarget.blur();
+                          } else if (e.key === 'Escape') {
+                            setNicknameValues(prev => ({ ...prev, [widget.id]: favorites.find(f => f.id === widget.id)?.nickname || '' }));
+                            setEditingNickname(null);
+                          }
+                        }}
+                        placeholder="Add nickname..."
+                        className="pixel-text-xs bg-white/10 border border-white/20 text-white px-2 py-1 rounded flex-1 focus:outline-none focus:border-white/40"
+                        autoFocus
+                      />
+                    ) : (
+                      <div className="flex items-center gap-2 flex-1">
+                        <button
+                          onClick={() => {
+                            const favorite = favorites.find(f => f.id === widget.id);
+                            setNicknameValues(prev => ({ ...prev, [widget.id]: favorite?.nickname || '' }));
+                            setEditingNickname(widget.id);
+                          }}
+                          className="pixel-text-xs text-white/70 hover:text-white transition-colors flex items-center gap-1 flex-1 text-left"
+                          title="Edit nickname"
+                        >
+                          {(() => {
+                            const favorite = favorites.find(f => f.id === widget.id);
+                            return favorite?.nickname ? (
+                              <span className="text-yellow-300">{favorite.nickname}</span>
+                            ) : (
+                              <span className="text-white/40 italic">Click to add nickname...</span>
+                            );
+                          })()}
+                        </button>
+                        <Edit2 size={12} className="text-white/40 hover:text-white/60 transition-colors" />
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {widget.loading ? (

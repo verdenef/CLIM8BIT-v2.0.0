@@ -14,6 +14,7 @@ class Favorite extends Model
         'user_id',
         'city',
         'country',
+        'nickname',
     ];
 
     public function user(): BelongsTo

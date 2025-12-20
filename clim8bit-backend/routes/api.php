@@ -21,6 +21,7 @@ Route::get('/forecast', [WeatherController::class, 'getForecast']);
 Route::middleware('auth')->group(function () {
     Route::get('/favorites', [FavoriteController::class, 'index']);
     Route::post('/favorites', [FavoriteController::class, 'store']);
+    Route::put('/favorites/{id}', [FavoriteController::class, 'update']);
     Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy']);
 
     Route::get('/recent-searches', [RecentSearchController::class, 'index']);

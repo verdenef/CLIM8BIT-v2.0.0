@@ -5,6 +5,7 @@ export interface FavoriteCity {
   id: string;
   name: string;
   country: string;
+  nickname?: string | null;
   addedAt: number;
 }
 
@@ -37,6 +38,7 @@ export function useFavorites() {
             id: String(fav.id),
             name: fav.city,
             country: fav.country,
+            nickname: fav.nickname || null,
             addedAt: new Date(fav.created_at).getTime(),
           }))
         );
@@ -48,7 +50,7 @@ export function useFavorites() {
     fetchFavorites();
   }, [user]);
 
-  const addFavorite = async (name: string, country: string) => {
+  const addFavorite = async (name: string, country: string, nickname?: string) => {
     if (!user) return false;
 
     // Check if already at max capacity
@@ -73,7 +75,7 @@ export function useFavorites() {
           'Accept': 'application/json',
         },
         credentials: 'same-origin',
-        body: JSON.stringify({ city: name, country }),
+        body: JSON.stringify({ city: name, country, nickname: nickname || null }),
       });
 
       if (!response.ok) {
@@ -88,6 +90,7 @@ export function useFavorites() {
           id: String(fav.id),
           name: fav.city,
           country: fav.country,
+          nickname: fav.nickname || null,
           addedAt: new Date(fav.created_at).getTime(),
         }))
       );
@@ -141,6 +144,47 @@ export function useFavorites() {
     return favorites.length < MAX_FAVORITES;
   };
 
+  const updateNickname = async (id: string, nickname: string | null) => {
+    if (!user) return false;
+
+    try {
+      // Get CSRF token from meta tag
+      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+      
+      const response = await fetch(`/api/favorites/${id}`, {
+        method: 'PUT',
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': csrfToken,
+          'Accept': 'application/json',
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({ nickname: nickname || null }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const errorMessage = errorData.message || errorData.error || 'Failed to update nickname';
+        throw new Error(errorMessage);
+      }
+
+      const data = await response.json();
+      setFavorites(
+        data.favorites.map((fav: any) => ({
+          id: String(fav.id),
+          name: fav.city,
+          country: fav.country,
+          nickname: fav.nickname || null,
+          addedAt: new Date(fav.created_at).getTime(),
+        }))
+      );
+      return true;
+    } catch (e: any) {
+      console.error('Update nickname error:', e);
+      return false;
+    }
+  };
+
   return {
     favorites,
     addFavorite,
@@ -149,5 +193,6 @@ export function useFavorites() {
     isFavorite,
     canAddMore,
     maxFavorites: MAX_FAVORITES,
+    updateNickname,
   };
 }
