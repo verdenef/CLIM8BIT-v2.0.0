@@ -21,7 +21,7 @@ export function IntroPage({
   isExiting = false,
 }: IntroPageProps) {
   const [blinkVisible, setBlinkVisible] = useState(true);
-  const [cycleProgress, setCycleProgress] = useState(0); // 0-100, represents full 100-second cycle
+  const [cycleProgress, setCycleProgress] = useState(0); // 0-100, represents full 60-second cycle
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,10 +31,10 @@ export function IntroPage({
     return () => clearInterval(interval);
   }, []);
 
-  // Animate the 100-second cycle (5 scenes × 20 seconds each)
+  // Animate the 60-second cycle (5 scenes × 12 seconds each)
   useEffect(() => {
     const cycleInterval = setInterval(() => {
-      setCycleProgress((prev) => (prev + 0.1) % 100); // Complete cycle every 100 seconds (100 / 0.1 = 1000 updates * 100ms = 100000ms)
+      setCycleProgress((prev) => (prev + 0.166666) % 100); // Complete cycle every 60 seconds (100 / 0.166666 = 600 updates * 100ms = 60000ms)
     }, 100); // Update every 100ms for smooth animation
 
     return () => clearInterval(cycleInterval);
@@ -85,62 +85,62 @@ export function IntroPage({
     let topColor: number[];
     let bottomColor: number[];
 
-    // 0-20%: Clear Day with Sun (20 seconds)
+    // 0-20%: Clear Day with Sun (12 seconds)
     if (cycleProgress < 20) {
-      if (cycleProgress < 17) {
+      if (cycleProgress < 15) {
         topColor = clearDayTop;
         bottomColor = clearDayBottom;
       } else {
-        // Transition to windy in last 3 seconds
-        const t = (cycleProgress - 17) / 3;
+        // Transition to windy in last 5% (3 seconds)
+        const t = (cycleProgress - 15) / 5;
         topColor = interpolateColor(clearDayTop, windyTop, t);
         bottomColor = interpolateColor(clearDayBottom, windyBottom, t);
       }
     }
-    // 20-40%: Strong Wind (20 seconds)
+    // 20-40%: Strong Wind (12 seconds)
     else if (cycleProgress < 40) {
-      if (cycleProgress < 37) {
+      if (cycleProgress < 35) {
         topColor = windyTop;
         bottomColor = windyBottom;
       } else {
-        // Transition to storm in last 3 seconds
-        const t = (cycleProgress - 37) / 3;
+        // Transition to storm in last 5% (3 seconds)
+        const t = (cycleProgress - 35) / 5;
         topColor = interpolateColor(windyTop, stormTop, t);
         bottomColor = interpolateColor(windyBottom, stormBottom, t);
       }
     }
-    // 40-60%: Heavy Storm (20 seconds)
+    // 40-60%: Heavy Storm (12 seconds)
     else if (cycleProgress < 60) {
-      if (cycleProgress < 57) {
+      if (cycleProgress < 55) {
         topColor = stormTop;
         bottomColor = stormBottom;
       } else {
-        // Transition to snow in last 3 seconds
-        const t = (cycleProgress - 57) / 3;
+        // Transition to snow in last 5% (3 seconds)
+        const t = (cycleProgress - 55) / 5;
         topColor = interpolateColor(stormTop, snowTop, t);
         bottomColor = interpolateColor(stormBottom, snowBottom, t);
       }
     }
-    // 60-80%: Snow (20 seconds)
+    // 60-80%: Snow (12 seconds)
     else if (cycleProgress < 80) {
-      if (cycleProgress < 77) {
+      if (cycleProgress < 75) {
         topColor = snowTop;
         bottomColor = snowBottom;
       } else {
-        // Transition to night in last 3 seconds
-        const t = (cycleProgress - 77) / 3;
+        // Transition to night in last 5% (3 seconds)
+        const t = (cycleProgress - 75) / 5;
         topColor = interpolateColor(snowTop, nightTop, t);
         bottomColor = interpolateColor(snowBottom, nightBottom, t);
       }
     }
-    // 80-100%: Night with Moon (20 seconds)
+    // 80-100%: Night with Moon (12 seconds)
     else {
-      if (cycleProgress < 97) {
+      if (cycleProgress < 95) {
         topColor = nightTop;
         bottomColor = nightBottom;
       } else {
-        // Transition back to clear day in last 3 seconds
-        const t = (cycleProgress - 97) / 3;
+        // Transition back to clear day in last 5% (3 seconds)
+        const t = (cycleProgress - 95) / 5;
         topColor = interpolateColor(nightTop, clearDayTop, t);
         bottomColor = interpolateColor(nightBottom, clearDayBottom, t);
       }
@@ -177,7 +177,7 @@ export function IntroPage({
   // Check if we're in a transition period (last 3 seconds of each scene)
   const isInTransition = () => {
     const sceneProgress = cycleProgress % 20;
-    return sceneProgress >= 17; // Last 3 seconds of any 20-second scene
+    return sceneProgress >= 15; // Last 5% (3 seconds) of any 12-second scene
   };
 
   // Sun appears during first scene only (0-20%), normalize to 0-100 for full arc
@@ -193,8 +193,8 @@ export function IntroPage({
   const showMoon = cycleProgress >= 80;
 
   // Calculate opacity for smooth fade out
-  const sunOpacity = cycleProgress < 18 ? 1 : cycleProgress < 20 ? (20 - cycleProgress) / 2 : 0;
-  const moonOpacity = cycleProgress < 98 ? 1 : (100 - cycleProgress) / 2;
+  const sunOpacity = cycleProgress < 15 ? 1 : cycleProgress < 20 ? (20 - cycleProgress) / 5 : 0;
+  const moonOpacity = cycleProgress < 95 ? 1 : (100 - cycleProgress) / 5;
 
   return (
     <div
