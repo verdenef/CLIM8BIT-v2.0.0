@@ -1,16 +1,35 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "api/index.php", "use": "@vercel/php" },
-    { "src": "public/**", "use": "@vercel/static" }
-  ],
+  "buildCommand": "bash vercel-build.sh",
+  "outputDirectory": "public",
+  "framework": null,
+  "installCommand": "composer install --no-dev --optimize-autoloader && npm install",
+  "functions": {
+    "api/index.php": {
+      "runtime": "@vercel/php@3.0.0",
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
   "routes": [
-    { "src": "/build/(.*)", "dest": "/public/build/$1" },
+    {
+      "src": "/build/(.*)",
+      "dest": "/public/build/$1",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
     {
       "src": "/(.*\\.(?:css|js|map|png|jpg|jpeg|gif|svg|webp|ico|txt|woff2?|ttf|eot))",
-      "dest": "/public/$1"
+      "dest": "/public/$1",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
     },
-    { "src": "/(.*)", "dest": "/api/index.php" }
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
   ]
 }
 

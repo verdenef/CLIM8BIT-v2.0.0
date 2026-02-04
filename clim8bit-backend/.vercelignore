@@ -1,0 +1,54 @@
+# Development files
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+
+# IDE files
+.idea
+.vscode
+.fleet
+.phpactor.json
+.phpunit.cache
+.phpunit.result.cache
+
+# Dependencies (will be installed during build)
+node_modules
+vendor
+
+# Laravel specific
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+bootstrap/cache/*
+!storage/framework/cache/.gitignore
+!storage/framework/sessions/.gitignore
+!storage/framework/testing/.gitignore
+!storage/framework/views/.gitignore
+!bootstrap/cache/.gitignore
+
+# Build artifacts (will be generated)
+public/build
+public/hot
+public/storage
+
+# Test files
+tests
+phpunit.xml
+
+# Documentation
+README.md
+*.md
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Other
+Homestead.json
+Homestead.yaml
+Thumbs.db

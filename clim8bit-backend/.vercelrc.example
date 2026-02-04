@@ -1,0 +1,10 @@
+{
+  "projectSettings": {
+    "framework": null,
+    "buildCommand": "bash vercel-build.sh",
+    "outputDirectory": "public",
+    "installCommand": "composer install --no-dev --optimize-autoloader && npm install",
+    "devCommand": "php artisan serve",
+    "rootDirectory": "clim8bit-backend"
+  }
+}
