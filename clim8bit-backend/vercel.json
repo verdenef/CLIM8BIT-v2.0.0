@@ -5,7 +5,7 @@
   "installCommand": "composer install --no-dev --optimize-autoloader && npm install",
   "framework": null,
   "builds": [
-    { "src": "api/index.php", "use": "@vercel/php@3.0.0" },
+    { "src": "api/index.php", "use": "vercel-php@0.7.3" },
     { "src": "public/**", "use": "@vercel/static" }
   ],
   "routes": [

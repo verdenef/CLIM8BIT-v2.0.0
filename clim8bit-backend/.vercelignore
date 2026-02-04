@@ -30,8 +30,7 @@ bootstrap/cache/*
 !storage/framework/views/.gitignore
 !bootstrap/cache/.gitignore
 
-# Build artifacts (will be generated)
-public/build
+# Build artifacts - do NOT ignore public/build (Vite output needed for deploy)
 public/hot
 public/storage
 

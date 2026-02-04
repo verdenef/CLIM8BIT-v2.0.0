@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "buildCommand": "cd clim8bit-backend && npm run build",
+  "installCommand": "cd clim8bit-backend && composer install --no-dev --optimize-autoloader && npm install",
+  "framework": null,
+  "builds": [
+    { "src": "clim8bit-backend/api/index.php", "use": "vercel-php@0.7.3" },
+    { "src": "clim8bit-backend/public/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/build/(.*)", "dest": "/clim8bit-backend/public/build/$1" },
+    { "src": "/assets/(.*)", "dest": "/clim8bit-backend/public/assets/$1" },
+    { "src": "/favicon\\.ico", "dest": "/clim8bit-backend/public/favicon.ico" },
+    { "src": "/robots\\.txt", "dest": "/clim8bit-backend/public/robots.txt" },
+    { "src": "/(.*)", "dest": "/clim8bit-backend/api/index.php" }
+  ]
+}
