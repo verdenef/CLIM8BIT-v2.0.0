@@ -12,8 +12,9 @@ return new class extends Migration
             $table->id();
             $table->string('city');
             $table->string('country');
-            $table->json('weather_data');
-            $table->json('forecast_data')->nullable();
+            // longText for MySQL < 5.7.8 (e.g. FreeSQL) which does not support native JSON
+            $table->longText('weather_data');
+            $table->longText('forecast_data')->nullable();
             $table->timestamp('cached_at');
             $table->timestamps();
 
