@@ -14,8 +14,8 @@
 .phpunit.result.cache
 
 # Dependencies (will be installed during build)
+# Do NOT ignore vendor: installCommand runs composer install; PHP runtime needs vendor/autoload.php
 node_modules
-vendor
 
 # Laravel specific
 storage/logs/*
