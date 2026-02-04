@@ -2,7 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "public",
   "framework": null,
   "installCommand": "composer install --no-dev --optimize-autoloader && npm install",
   "functions": {
@@ -13,14 +12,15 @@
     }
   },
   "rewrites": [
-    {
-      "source": "/((?!build/|assets/|favicon\\.ico|robots\\.txt).*)",
-      "destination": "/api/index.php"
-    }
+    { "source": "/build/:path*", "destination": "/public/build/:path*" },
+    { "source": "/assets/:path*", "destination": "/public/assets/:path*" },
+    { "source": "/favicon.ico", "destination": "/public/favicon.ico" },
+    { "source": "/robots.txt", "destination": "/public/robots.txt" },
+    { "source": "/(.*)", "destination": "/api/index.php" }
   ],
   "headers": [
     {
-      "source": "/build/(.*)",
+      "source": "/build/:path*",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
