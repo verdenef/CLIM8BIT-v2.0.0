@@ -10,7 +10,8 @@
       "use": "vercel-php@0.7.3",
       "config": {
         "includeFiles": [
-          "vendor/laravel/framework/src/Illuminate/Foundation/resources/**"
+          "vendor/laravel/framework/src/Illuminate/Foundation/resources/**",
+          "public/build/**"
         ]
       }
     },

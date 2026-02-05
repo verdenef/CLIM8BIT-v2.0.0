@@ -9,7 +9,8 @@
       "use": "vercel-php@0.7.3",
       "config": {
         "includeFiles": [
-          "clim8bit-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/**"
+          "clim8bit-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/**",
+          "clim8bit-backend/public/build/**"
         ]
       }
     },
