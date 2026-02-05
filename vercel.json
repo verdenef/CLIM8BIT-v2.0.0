@@ -4,7 +4,7 @@
   "installCommand": "cd clim8bit-backend && composer install --no-dev --optimize-autoloader && npm install",
   "framework": null,
   "functions": {
-    "clim8bit-backend/api/index.php": {
+    "api/index.php": {
       "runtime": "vercel-php@0.7.3",
       "includeFiles": "{clim8bit-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/**,clim8bit-backend/public/build/**}"
     }
@@ -14,6 +14,6 @@
     { "src": "/assets/(.*)", "dest": "/clim8bit-backend/public/assets/$1" },
     { "src": "/favicon\\.ico", "dest": "/clim8bit-backend/public/favicon.ico" },
     { "src": "/robots\\.txt", "dest": "/clim8bit-backend/public/robots.txt" },
-    { "src": "/(.*)", "dest": "/clim8bit-backend/api/index.php" }
+    { "src": "/(.*)", "dest": "/api/index.php" }
   ]
 }
