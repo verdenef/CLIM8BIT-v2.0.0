@@ -4,11 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserPreferenceController;
+use App\Http\Controllers\WeatherController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Weather/Index');
 })->name('home');
+
+// Public weather API routes (also exposed on /api/* so Vercel+Laravel always see them)
+Route::get('/api/weather', [WeatherController::class, 'getWeather']);
+Route::get('/api/forecast', [WeatherController::class, 'getForecast']);
 
 // Public authentication routes
 Route::post('/login', [AuthController::class, 'login'])->name('login');
