@@ -140,14 +140,8 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           </button>
         </div>
 
-        {/* Demo note */}
-        <div className="mt-6 pt-4 border-t-2 border-white/10">
-          <p className="pixel-text-xs text-white/40 text-center">
-            NOTE: This is a demo. Data is stored locally.
-            <br />
-            Ready for Laravel + Inertia backend.
-          </p>
-        </div>
+        {/* Footer spacing (no demo note in production) */}
+        <div className="mt-6 pt-4 border-t-2 border-white/10" />
       </div>
     </div>
   );
