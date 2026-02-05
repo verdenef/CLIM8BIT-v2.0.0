@@ -8,7 +8,8 @@
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.3",
-      "includeFiles": "{composer.json,composer.lock,vendor/laravel/framework/src/Illuminate/Foundation/resources/**,public/build/**}"
+      "includeFiles": "{composer.json,composer.lock,vendor/laravel/framework/src/Illuminate/Foundation/resources/**,public/build/**}",
+      "excludeFiles": "{**/node_modules/**,**/tests/**,**/.git/**,**/.github/**,**/storage/**}"
     }
   },
   "routes": [

@@ -7,7 +7,8 @@
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.3",
-      "includeFiles": "{clim8bit-backend/composer.json,clim8bit-backend/composer.lock,clim8bit-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/**,clim8bit-backend/public/build/**}"
+      "includeFiles": "{clim8bit-backend/composer.json,clim8bit-backend/composer.lock,clim8bit-backend/vendor/laravel/framework/src/Illuminate/Foundation/resources/**,clim8bit-backend/public/build/**}",
+      "excludeFiles": "{**/node_modules/**,**/tests/**,**/.git/**,**/.github/**,**/storage/**}"
     }
   },
   "routes": [
