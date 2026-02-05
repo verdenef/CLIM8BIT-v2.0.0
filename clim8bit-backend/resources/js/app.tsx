@@ -1,10 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
-import { inject } from '@vercel/analytics';
 import '../css/app.css';
-
-// Initialize Vercel Analytics
-inject();
 
 createInertiaApp({
   resolve: (name) => {

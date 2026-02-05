@@ -3,7 +3,7 @@ export async function getWeather(city: string) {
     throw new Error('City name is required');
   }
 
-  const response = await fetch(`/api/weather?city=${encodeURIComponent(city.trim())}`);
+  const response = await fetch(`/weather-proxy?city=${encodeURIComponent(city.trim())}`);
   if (!response.ok) {
     // Try to parse error response from backend
     let errorMessage = 'Failed to fetch weather';
@@ -70,7 +70,7 @@ export async function getWeatherByCoords(lat: number, lon: number) {
     throw new Error('Invalid coordinates');
   }
 
-  const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
+  const response = await fetch(`/weather-proxy?lat=${lat}&lon=${lon}`);
   if (!response.ok) {
     // Try to parse error response from backend
     let errorMessage = 'Failed to fetch weather';
@@ -122,7 +122,7 @@ export async function getForecast(city: string) {
     throw new Error('City name is required');
   }
 
-  const response = await fetch(`/api/forecast?city=${encodeURIComponent(city.trim())}`);
+  const response = await fetch(`/forecast-proxy?city=${encodeURIComponent(city.trim())}`);
   if (!response.ok) {
     // Try to parse error response from backend
     let errorMessage = 'Failed to fetch forecast';
