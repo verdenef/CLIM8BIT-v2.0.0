@@ -2,12 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "buildCommand": "npm run build",
-  "installCommand": "composer install --no-dev --optimize-autoloader && npm install",
+  "installCommand": "npm ci",
   "framework": null,
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.3",
-      "includeFiles": "{vendor/laravel/framework/src/Illuminate/Foundation/resources/**,public/build/**}"
+      "includeFiles": "{composer.json,composer.lock,vendor/laravel/framework/src/Illuminate/Foundation/resources/**,public/build/**}"
     }
   },
   "routes": [
