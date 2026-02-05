@@ -11,6 +11,12 @@ A full-stack weather application featuring advanced weather-responsive animation
 
 ---
 
+## 🔗 Live Demo
+
+**Try it here:** [https://clim8bit.vercel.app](https://clim8bit.vercel.app)
+
+---
+
 ## 🎮 Features
 
 ### 🌨️ Advanced Weather Effects
