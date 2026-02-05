@@ -33,7 +33,6 @@ bootstrap/cache/*
 # Build artifacts - do NOT ignore public/build (Vite output needed for deploy)
 public/hot
 public/storage
-public/build
 
 # Test files
 tests

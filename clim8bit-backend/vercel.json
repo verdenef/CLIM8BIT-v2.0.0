@@ -4,19 +4,15 @@
   "buildCommand": "npm run build",
   "installCommand": "composer install --no-dev --optimize-autoloader && npm install",
   "framework": null,
-  "builds": [
-    {
-      "src": "api/index.php",
-      "use": "vercel-php@0.7.3",
-      "config": {
-        "includeFiles": [
-          "vendor/laravel/framework/src/Illuminate/Foundation/resources/**",
-          "public/build/**"
-        ]
-      }
-    },
-    { "src": "public/**", "use": "@vercel/static" }
-  ],
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.3",
+      "includeFiles": [
+        "vendor/laravel/framework/src/Illuminate/Foundation/resources/**",
+        "public/build/**"
+      ]
+    }
+  },
   "routes": [
     { "src": "/build/(.*)", "dest": "/public/build/$1" },
     { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
