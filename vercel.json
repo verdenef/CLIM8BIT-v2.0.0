@@ -2,6 +2,7 @@
   "version": 2,
   "buildCommand": "cd clim8bit-backend && npm run build",
   "installCommand": "cd clim8bit-backend && npm ci",
+  "outputDirectory": "clim8bit-backend/public",
   "framework": null,
   "functions": {
     "api/index.php": {

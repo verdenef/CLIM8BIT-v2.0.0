@@ -3,6 +3,7 @@
   "version": 2,
   "buildCommand": "npm run build",
   "installCommand": "npm ci",
+  "outputDirectory": "public",
   "framework": null,
   "functions": {
     "api/index.php": {
