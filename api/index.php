@@ -73,13 +73,6 @@ if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || getenv('VERCEL')) {
         $_ENV[$k] = $v;
         $_SERVER[$k] = $v;
     }
-
-    // Enable debug mode if query param ?debug=clim8bit is provided
-    if (isset($_GET['debug']) && $_GET['debug'] === 'clim8bit') {
-        putenv('APP_DEBUG=true');
-        $_ENV['APP_DEBUG'] = 'true';
-        $_SERVER['APP_DEBUG'] = 'true';
-    }
 }
 
 require __DIR__ . '/../clim8bit-backend/public/index.php';

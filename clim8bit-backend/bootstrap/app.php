@@ -20,12 +20,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (\Throwable $e) {
-            if (request()->has('debug')) {
-                return response("CLIM8BIT DEBUG:\n" . $e->getMessage() . "\nFile: " . $e->getFile() . ":" . $e->getLine() . "\n\nTrace:\n" . $e->getTraceAsString(), 500)
-                    ->header('Content-Type', 'text/plain');
-            }
-        });
+        //
     })->create();
 
 if ($storagePath = env('APP_STORAGE')) {
