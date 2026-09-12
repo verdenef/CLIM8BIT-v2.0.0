@@ -7,8 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+use App\Services\FirebaseService;
+
 class ProfileController extends Controller
 {
+    protected FirebaseService $firebase;
+
+    public function __construct(FirebaseService $firebase)
+    {
+        $this->firebase = $firebase;
+    }
+
     /**
      * Update user email
      */
@@ -30,6 +39,16 @@ class ProfileController extends Controller
         $user->email = $request->email;
         $user->save();
 
+        // Sync to Firestore
+        $this->firebase->syncUser([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $user->password,
+            'temperature_unit' => $user->temperature_unit ?? 'C',
+            'updated_at' => now()->toIso8601String(),
+        ]);
+
         return response()->json([
             'message' => 'Email updated successfully',
             'user' => $user,
@@ -49,6 +68,16 @@ class ProfileController extends Controller
 
         $user->name = $request->username;
         $user->save();
+
+        // Sync to Firestore
+        $this->firebase->syncUser([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $user->password,
+            'temperature_unit' => $user->temperature_unit ?? 'C',
+            'updated_at' => now()->toIso8601String(),
+        ]);
 
         return response()->json([
             'message' => 'Username updated successfully',
@@ -77,6 +106,16 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
+        // Sync to Firestore
+        $this->firebase->syncUser([
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $user->password,
+            'temperature_unit' => $user->temperature_unit ?? 'C',
+            'updated_at' => now()->toIso8601String(),
+        ]);
+
         return response()->json([
             'message' => 'Password changed successfully',
         ]);
@@ -99,8 +138,12 @@ class ProfileController extends Controller
             ]);
         }
 
+        $userId = $user->id;
         Auth::logout();
         $user->delete();
+
+        // Delete from Firestore
+        $this->firebase->deleteUser($userId);
 
         return response()->json([
             'message' => 'Account deleted successfully',

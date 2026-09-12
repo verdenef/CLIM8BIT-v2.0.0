@@ -62,4 +62,6 @@ bootstrap/cache/*
 *.tmp
 *.temp
 .cache/
-
+key/
+*firebase-adminsdk*.json
+genos.zip

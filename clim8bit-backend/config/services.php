@@ -42,4 +42,10 @@ return [
         'key_4' => env('OPENWEATHER_API_KEY_4'),
     ],
 
+    'firebase' => [
+        'credentials' => env('FIREBASE_CREDENTIALS', base_path('../key/clim8bit-firebase-adminsdk-fbsvc-6aa18172f7.json')),
+        'project_id' => env('FIREBASE_PROJECT_ID', 'clim8bit'),
+        'database_url' => env('FIREBASE_DATABASE_URL'),
+    ],
+
 ];
