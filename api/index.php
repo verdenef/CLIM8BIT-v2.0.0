@@ -57,14 +57,22 @@ if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || getenv('VERCEL')) {
         $_SERVER['APP_KEY'] = 'base64:NR8K6RCvNz8Fy2ibylPVDDWOGZk05k2uO6xk8awyuoQ=';
     }
 
-    putenv("DB_CONNECTION=sqlite");
-    putenv("DB_DATABASE={$targetDb}");
-    putenv("APP_STORAGE=/tmp/storage");
-    putenv("APP_BOOTSTRAP_PATH=/tmp/bootstrap");
-    putenv("VIEW_COMPILED_PATH=/tmp/storage/framework/views");
-    putenv("SESSION_DRIVER=cookie");
-    putenv("CACHE_STORE=array");
-    putenv("LOG_CHANNEL=stderr");
+    $envOverrides = [
+        'DB_CONNECTION' => 'sqlite',
+        'DB_DATABASE' => $targetDb,
+        'APP_STORAGE' => '/tmp/storage',
+        'APP_BOOTSTRAP_PATH' => '/tmp/bootstrap',
+        'VIEW_COMPILED_PATH' => '/tmp/storage/framework/views',
+        'SESSION_DRIVER' => 'cookie',
+        'CACHE_STORE' => 'array',
+        'LOG_CHANNEL' => 'stderr',
+    ];
+
+    foreach ($envOverrides as $k => $v) {
+        putenv("{$k}={$v}");
+        $_ENV[$k] = $v;
+        $_SERVER[$k] = $v;
+    }
 
     // Enable debug mode if query param ?debug=clim8bit is provided
     if (isset($_GET['debug']) && $_GET['debug'] === 'clim8bit') {
