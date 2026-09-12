@@ -23,6 +23,22 @@ if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || getenv('VERCEL')) {
         }
     }
 
+    // Copy bootstrap files into writable /tmp/bootstrap
+    $sourceBootstrap = __DIR__ . '/../clim8bit-backend/bootstrap';
+    $targetBootstrap = '/tmp/bootstrap';
+    if (file_exists($sourceBootstrap . '/providers.php') && !file_exists($targetBootstrap . '/providers.php')) {
+        @copy($sourceBootstrap . '/providers.php', $targetBootstrap . '/providers.php');
+    }
+    if (file_exists($sourceBootstrap . '/app.php') && !file_exists($targetBootstrap . '/app.php')) {
+        @copy($sourceBootstrap . '/app.php', $targetBootstrap . '/app.php');
+    }
+    if (file_exists($sourceBootstrap . '/cache/packages.php') && !file_exists($targetBootstrap . '/cache/packages.php')) {
+        @copy($sourceBootstrap . '/cache/packages.php', $targetBootstrap . '/cache/packages.php');
+    }
+    if (file_exists($sourceBootstrap . '/cache/services.php') && !file_exists($targetBootstrap . '/cache/services.php')) {
+        @copy($sourceBootstrap . '/cache/services.php', $targetBootstrap . '/cache/services.php');
+    }
+
     // Prepare SQLite database in /tmp
     $sourceDb = __DIR__ . '/../clim8bit-backend/database/database.sqlite';
     $targetDb = '/tmp/database.sqlite';
@@ -34,12 +50,28 @@ if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || getenv('VERCEL')) {
         }
     }
 
+    // Default APP_KEY fallback if not provided in Vercel environment
+    if (!getenv('APP_KEY') && !isset($_ENV['APP_KEY']) && !isset($_SERVER['APP_KEY'])) {
+        putenv('APP_KEY=base64:NR8K6RCvNz8Fy2ibylPVDDWOGZk05k2uO6xk8awyuoQ=');
+        $_ENV['APP_KEY'] = 'base64:NR8K6RCvNz8Fy2ibylPVDDWOGZk05k2uO6xk8awyuoQ=';
+        $_SERVER['APP_KEY'] = 'base64:NR8K6RCvNz8Fy2ibylPVDDWOGZk05k2uO6xk8awyuoQ=';
+    }
+
     putenv("DB_CONNECTION=sqlite");
     putenv("DB_DATABASE={$targetDb}");
     putenv("APP_STORAGE=/tmp/storage");
+    putenv("APP_BOOTSTRAP_PATH=/tmp/bootstrap");
     putenv("VIEW_COMPILED_PATH=/tmp/storage/framework/views");
     putenv("SESSION_DRIVER=cookie");
     putenv("CACHE_STORE=array");
+    putenv("LOG_CHANNEL=stderr");
+
+    // Enable debug mode if query param ?debug=clim8bit is provided
+    if (isset($_GET['debug']) && $_GET['debug'] === 'clim8bit') {
+        putenv('APP_DEBUG=true');
+        $_ENV['APP_DEBUG'] = 'true';
+        $_SERVER['APP_DEBUG'] = 'true';
+    }
 }
 
 require __DIR__ . '/../clim8bit-backend/public/index.php';
