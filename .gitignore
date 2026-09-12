@@ -38,6 +38,7 @@ vendor/
 dist/
 build/
 **/build/
+!clim8bit-backend/public/build/**
 *.min.js
 *.min.css
 
