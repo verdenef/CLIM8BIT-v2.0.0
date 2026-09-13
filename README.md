@@ -1,428 +1,175 @@
-# ⛈️ CLIM8BIT - Pixel-Perfect Retro Weather App
+# ⛈️ CLIM8BIT
 
-A full-stack weather application featuring advanced weather-responsive animations, interactive physics, pixel-art aesthetics, and a robust Laravel backend with API key rotation and caching.
+An 8-bit retro-styled weather web application featuring real-time meteorological data, procedural canvas physics, and a serverless Laravel backend with cloud persistence.
 
-![CLIM8BIT](https://img.shields.io/badge/CLIM8BIT-Pixel%20Weather-blue?style=for-the-badge)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?style=for-the-badge&logo=typescript)
-![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=for-the-badge&logo=laravel)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql)
-![Inertia](https://img.shields.io/badge/Inertia.js-2.0-9553E9?style=for-the-badge)
-
----
-
-## 🔗 Live Demo
-
-**Try it here:** [https://clim8bit.vercel.app](https://clim8bit.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-clim8bit.vercel.app-22c55e?style=for-the-badge&logo=vercel)](https://clim8bit.vercel.app)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=for-the-badge&logo=laravel)](https://laravel.com/)
+[![Firebase](https://img.shields.io/badge/Firestore-NoSQL-FFA611?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+[![Inertia.js](https://img.shields.io/badge/Inertia.js-2.0-9553E9?style=for-the-badge)](https://inertiajs.com/)
 
 ---
 
-## 🎮 Features
+## 🔗 Live Application
 
-### 🌨️ Advanced Weather Effects
-- **Snow**: Temperature-aware (≤5°C), wind-blown particles with accumulation on panels
-- **Rain**: Dynamic intensity with wind angles and puddle splashes
-- **Thunderstorms**: Realistic lightning flashes at random intervals
-- **Fog**: Multi-layered mist with parallax movement
-- **Leaves**: Autumn leaves blown by wind (daytime only)
-- **Clouds**: Animated cloud formations
-- **Flood**: Rising water at footer during heavy rain
-
-### 🌙 Night Sky Features
-- **Moon Phases**: Astronomically accurate (calculated from current date)
-- **Moon Phase Selector**: Manual control of all 32 phases in demo mode
-- **Stars**: Twinkling background stars
-- **Meteor Showers**: Shooting stars during clear nights
-
-### 🎮 Interactive Physics
-- **Slippery Cursor**: Momentum-based sliding on ice/snow (temp ≤5°C)
-- **Wind-Blown Cursor**: Physics-based wind push with screen wrapping
-- **Floating Cursor**: Bobbing on flood water surface
-- **Toggle Physics**: Can enable/disable cursor effects
-
-### 🎨 Visual Design
-- **Pixel-Perfect**: Press Start 2P font throughout
-- **Retro Aesthetic**: 8-bit inspired UI with pixelated rendering
-- **Dynamic Backgrounds**: Weather-responsive gradients
-- **Blur Panels**: Frosted glass effect with pixel borders
-- **Drop Shadows & Glow**: Enhanced depth perception
-
-### 📊 Core Functionality
-- **Real-Time Weather**: OpenWeather API integration
-- **5-Day Forecast**: Daily weather predictions
-- **City Search**: Autocomplete with 120+ global cities
-- **Geolocation**: Auto-detect user's location
-- **Weather Alerts**: Safety tips based on conditions
-- **Favorites**: Save frequently checked cities
-- **Recent Searches**: Track search history
-- **Temperature Units**: Toggle °C/°F
-
-### 👤 User Features
-- **Session-Based Authentication**: Laravel authentication with bcrypt password hashing
-- **Profile Management**: Update email, username, password, and temperature preferences
-- **Account Deletion**: Secure account removal with password verification
-- **User Preferences**: Temperature unit (Celsius/Fahrenheit) stored per user
-- **Favorites System**: Save up to 3 favorite cities (backend-enforced)
-- **Recent Searches**: Track last 10 searches per user
-
-### 🕹️ Demo Mode
-- **Manual Weather Selection**: Test all weather types
-- **Day/Night Toggle**: Switch between modes
-- **Moon Phase Selector**: Choose from all 32 lunar phases
-- **Individual Effect Controls**: Toggle snow, leaves, clouds
-- **Wind Speed Slider**: Adjust wind force (0-100 km/h)
-- **Hide UI**: Screenshot mode
+**Production URL:** [https://clim8bit.vercel.app](https://clim8bit.vercel.app)  
+**System Status:** `HTTP 200 OK` (Health Endpoint: `/up`)
 
 ---
 
-## 🚀 Quick Start
+## 🎮 Overview
 
-### Prerequisites
-- **PHP 8.2+** with extensions: BCMath, Ctype, Fileinfo, JSON, Mbstring, OpenSSL, PDO, Tokenizer, XML
-- **Node.js 18+** and npm
-- **MySQL 8.0+** or MariaDB 10.3+
-- **Composer** (PHP dependency manager)
-- **OpenWeather API keys** (get free at [openweathermap.org](https://openweathermap.org/api)) - Recommended: 4 keys for rotation
+CLIM8BIT translates live weather data into an authentic 8-bit retro gaming experience. It pairs real-time metrics from the OpenWeather API with custom HTML5 Canvas particle systems, interactive cursor physics, and celestial calculations—rendered using the retro *Press Start 2P* pixel typography.
 
-### Installation
+### Key Features
 
-```bash
-# Clone the repository
-git clone https://github.com/verdenef/CLIM8BIT-v2.0.0.git
-cd CLIM8BIT-v2.0.0/clim8bit-backend
-
-# Install PHP dependencies
-composer install
-
-# Install Node.js dependencies
-npm install
-
-# Copy environment file
-cp .env.example .env
-
-# Generate application key
-php artisan key:generate
-
-# Configure database in .env file (see below)
-
-# Run migrations
-php artisan migrate
-
-# Build frontend assets (for production)
-npm run build
-
-# Start development servers
-# Terminal 1: Laravel server
-php artisan serve
-
-# Terminal 2: Vite dev server (for hot reload)
-npm run dev
-```
-
-### Database Setup
-
-```bash
-# Create MySQL database
-mysql -u root -p
-CREATE DATABASE clim8bit CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-EXIT;
-
-# Run migrations
-php artisan migrate
-
-# (Optional) Seed with test data
-php artisan db:seed
-```
-
-### Environment Setup
-
-Create/update `.env` file in `clim8bit-backend/`:
-
-```env
-APP_NAME=CLIM8BIT
-APP_ENV=local
-APP_KEY=base64:... (generated by artisan key:generate)
-APP_DEBUG=true
-APP_URL=http://localhost:8000
-
-# Database Configuration
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=clim8bit
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-
-# OpenWeather API Keys (4 keys for rotation)
-OPENWEATHER_KEY_1=your_first_api_key
-OPENWEATHER_KEY_2=your_second_api_key
-OPENWEATHER_KEY_3=your_third_api_key
-OPENWEATHER_KEY_4=your_fourth_api_key
-
-# Cache Configuration
-CACHE_DRIVER=file
-CACHE_WEATHER_TTL=600  # 10 minutes in seconds
-
-# Session Configuration
-SESSION_DRIVER=file
-SESSION_LIFETIME=120
-```
+* **Real-Time Weather & Forecasts**: Search across 120+ global cities with autocomplete or use browser geolocation to view current conditions and 5-day / 3-hour forecast intervals.
+* **Atmospheric Particle Engine**:
+  * **Dynamic Rain**: Variable drop density, wind-angled streaks, and puddle splashes.
+  * **Temperature-Aware Snow**: Procedural flakes that stick and accumulate atop UI panels at temperatures ≤5°C.
+  * **Thunderstorms**: Randomized screen-wide lightning flashes.
+  * **Parallax Fog & Wind**: Multi-layered drifting mist and daytime autumn leaves.
+* **Interactive Cursor Physics**:
+  * **Ice Mode (≤5°C)**: Momentum-based sliding with reduced friction.
+  * **Wind Mode**: Continuous directional push with edge-to-edge screen wrapping.
+  * **Flood Mode**: Floating buoyancy and wave bobbing along the footer water line.
+* **Astronomical Night Sky**:
+  * Accurate 32-phase lunar calculator derived from the current calendar date.
+  * Twinkling starfields and animated meteor showers on clear nights.
+* **Demo / Sandbox Mode**: Manual override controls to toggle weather types, adjust wind velocity (0–100 km/h), select moon phases, or hide UI elements.
+* **User Accounts & Cloud Sync**:
+  * Session-based authentication via Laravel Sanctum.
+  * Encrypted cookie session handling and user preferences (°C / °F).
+  * Favorite cities bookmarking (backend-enforced limit of 3) and recent search history synced to Google Cloud Firestore.
 
 ---
 
-## 🏗️ Project Structure
+## 🛠️ Tech Stack
+
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React 19, Inertia.js 2.0, TypeScript, Tailwind CSS v4, HTML5 Canvas API |
+| **Backend** | Laravel 12, PHP 8.2+, Laravel Sanctum, Guzzle HTTP |
+| **Database & Cloud** | Google Cloud Firestore (Cloud REST CRUD), SQLite (Local Fallback) |
+| **Deployment** | Vercel Serverless (`vercel-php@0.7.3`), Vite 7 |
+| **External APIs** | OpenWeather Current Weather & 5-Day Forecast APIs |
+
+---
+
+## 🏗️ Architecture & Project Structure
 
 ```
 CLIM8BIT/
-├── clim8bit-backend/         # Laravel + Inertia.js backend
+├── api/
+│   └── index.php             # Vercel serverless entrypoint (/tmp storage & env bootstrap)
+├── clim8bit-backend/
 │   ├── app/
-│   │   ├── Http/
-│   │   │   └── Controllers/  # API controllers
-│   │   │       ├── WeatherController.php
-│   │   │       ├── AuthController.php
-│   │   │       ├── FavoriteController.php
-│   │   │       ├── ProfileController.php
-│   │   │       └── RecentSearchController.php
-│   │   ├── Models/           # Eloquent models
-│   │   │   ├── User.php
-│   │   │   ├── Favorite.php
-│   │   │   └── RecentSearch.php
-│   │   └── Services/         # Business logic
-│   │       └── WeatherService.php  # API key rotation & caching
+│   │   ├── Http/Controllers/ # Weather, Auth, Favorites, Profile, RecentSearches
+│   │   ├── Models/           # User, Favorite, RecentSearch
+│   │   └── Services/         # OpenWeather proxy (key rotation) & FirebaseService
 │   ├── database/
-│   │   └── migrations/       # Database migrations
+│   │   ├── migrations/       # Schema definitions
+│   │   └── database.sqlite   # Local SQLite database
 │   ├── resources/
+│   │   ├── css/              # Retro pixel stylesheets & animations
 │   │   ├── js/
-│   │   │   ├── components/  # React components
-│   │   │   │   ├── effects/  # Weather effects
-│   │   │   │   │   ├── RainEffect.tsx
-│   │   │   │   │   ├── SnowEffect.tsx
-│   │   │   │   │   ├── SlipperyCursor.tsx
-│   │   │   │   │   └── ... (12 effects total)
-│   │   │   │   ├── ui/  # UI components
-│   │   │   │   ├── WeatherDisplay.tsx
-│   │   │   │   ├── SearchBar.tsx
-│   │   │   │   └── ... (15+ components)
-│   │   │   ├── hooks/        # Custom React hooks
-│   │   │   ├── Pages/         # Inertia pages
-│   │   │   └── Utils/         # Utilities
-│   │   └── css/
-│   │       └── app.css        # Tailwind + custom styles
+│   │   │   ├── components/   # Weather effects, canvas physics, and UI modals
+│   │   │   ├── Pages/        # Inertia React views (Weather/Index)
+│   │   │   └── app.tsx       # Application bootstrapping
+│   │   └── views/
+│   │       └── app.blade.php # Root HTML layout
 │   ├── routes/
-│   │   ├── web.php           # Inertia routes
-│   │   └── api.php           # API endpoints
+│   │   ├── web.php           # Inertia routes & public API proxies
+│   │   └── api.php           # Protected API endpoints
 │   └── public/
-│       └── assets/           # Static assets (images, etc.)
-└── README.md                 # This file
+│       └── build/            # Compiled Vite assets (manifest.json, bundles)
+├── vercel.json               # Serverless runtime & static routing configuration
+└── README.md
 ```
 
 ---
 
-## 🎨 Tech Stack
+## 🚀 Getting Started
 
-### Frontend
-- **React 19** - UI library with hooks
-- **TypeScript 5+** - Type safety
-- **Tailwind CSS v4** - Utility-first styling
-- **CSS Animations** - GPU-accelerated particle animations (rain, snow, wind, fog)
-- **Inertia.js 2.0** - SPA adapter (no API calls needed)
-- **Vite 7** - Build tool and dev server
+### Prerequisites
 
-### Backend
-- **Laravel 12** - PHP framework
-- **MySQL 8.0** - Relational database
-- **Eloquent ORM** - Database abstraction
-- **Laravel Sanctum** - Session-based authentication
-- **Laravel Cache** - Response caching (10-minute TTL)
+* **PHP 8.2+** with `pdo_sqlite`, `sodium`, `openssl`, `mbstring`, `fileinfo`
+* **Node.js 18+** & npm
+* **Composer**
+* **OpenWeather API Key** ([openweathermap.org](https://openweathermap.org/api))
 
-### APIs & Services
-- **OpenWeather API** - Real-time weather data
-  - **4-Key Rotation** - Round-robin algorithm for 4× rate limit capacity
-  - **Server-Side Caching** - Reduces API calls by 80-90%
-- **Geolocation API** - User location detection
+### Local Installation
 
-### Key Backend Features
-- ✅ **API Key Rotation** - 4 keys = 240 calls/minute capacity
-- ✅ **Response Caching** - 10-minute TTL, reduces API calls significantly
-- ✅ **Session Authentication** - Secure, server-side sessions
-- ✅ **Database Relationships** - Foreign keys with cascade deletes
-- ✅ **Error Handling** - Categorized errors (404, 401, 429, 500)
-- ✅ **Input Validation** - Laravel validation rules
-- ✅ **Security** - CSRF protection, password hashing (bcrypt), SQL injection prevention
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/verdenef/CLIM8BIT-v2.0.0.git
+   cd CLIM8BIT-v2.0.0/clim8bit-backend
+   ```
 
----
+2. **Install dependencies:**
+   ```bash
+   composer install
+   npm install
+   ```
 
-## 🌟 Highlights
+3. **Configure environment:**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-### Most Complex Features
+4. **Set up database:**
+   ```bash
+   touch database/database.sqlite
+   php artisan migrate
+   ```
 
-#### 1. Slippery Cursor Physics
-```typescript
-// Real physics simulation with:
-- Velocity & acceleration
-- Friction coefficients (ice vs air vs water)
-- Gravity (0.15 pixels/frame²)
-- Buoyancy in flood water
-- Screen wrapping in wind mode
-- 60fps animation loop
-```
+5. **Configure API Keys in `.env`:**
+   ```env
+   OPENWEATHER_API_KEY_1=your_openweather_api_key
+   # Optional: add up to 4 keys for automatic round-robin rotation
+   OPENWEATHER_API_KEY_2=
+   OPENWEATHER_API_KEY_3=
+   OPENWEATHER_API_KEY_4=
 
-#### 2. Moon Phase Calculation
-```typescript
-// Astronomical accuracy using:
-- Known new moon reference date
-- 29.53-day lunar cycle
-- Current date calculation
-- 32 distinct moon phases (8 images mapped)
-- Manual phase selector in demo mode
-```
+   # Database
+   DB_CONNECTION=sqlite
 
-#### 3. CSS Animation Particle Systems
-```typescript
-// GPU-accelerated rendering of:
-- 150+ raindrops simultaneously
-- 60+ snowflakes with individual properties
-- Particle creation once, CSS handles infinite loops
-- Zero JavaScript execution during animation
-- requestAnimationFrame only for cursor physics (SlipperyCursor.tsx)
-```
+   # Firebase / Firestore (Optional for local development)
+   FIREBASE_PROJECT_ID=clim8bit
+   FIREBASE_CREDENTIALS=/path/to/service-account.json
+   ```
+
+6. **Build assets and start development:**
+   ```bash
+   # Terminal 1: Laravel backend
+   php artisan serve
+
+   # Terminal 2: Vite development server
+   npm run dev
+   ```
 
 ---
 
-## 📊 Performance
+## ⚙️ Backend Services
 
-### Metrics
-- **250+ particles** animating at 60fps
-- **<25MB** memory footprint with all effects active
-- **<100ms** API response time (with caching)
-- **0 layout shifts** during weather changes
-- **Responsive** on mobile and desktop
-
-### Optimizations
-- ✅ CSS animations (GPU-accelerated, zero JS overhead)
-- ✅ RequestAnimationFrame for cursor physics only
-- ✅ Particle creation once, CSS handles infinite loops
-- ✅ Conditional effect rendering
-- ✅ API response caching (10 minutes)
-- ✅ Debounced search input (300ms)
+* **API Key Rotation & Resiliency**: The backend maintains a round-robin rotation service supporting up to 4 OpenWeather API keys with fallback error recovery, increasing throughput capacity up to 240 requests/minute.
+* **Server-Side Cache**: Successful weather responses are cached (10-minute TTL) to minimize third-party API latency and preserve rate limits.
+* **Serverless Compatibility**: Optimized for AWS Lambda / Vercel Serverless by routing views, sessions, and SQLite cache into writable `/tmp` paths and decoupling dependencies from read-only filesystem layers.
 
 ---
 
-## 🎯 Usage
+## 👥 Authors
 
-### Real Weather Mode
-1. Click "Use My Location" for automatic detection
-2. Or search for any city in the search bar
-3. View current weather + 5-day forecast
-4. Visual effects activate automatically based on conditions
+**Caraga State University** — College of Computing and Information Sciences  
+*Course:* IT-112 Systems Integration and Architecture 1 (Section: BRFV1)
 
-### Demo Mode
-1. Click demo mode toggle in controls
-2. Select weather type manually
-3. Adjust wind speed with slider
-4. Toggle individual effects on/off
-5. Switch between day/night
-
-### Cursor Physics
-- Automatically activates in appropriate weather
-- Can be toggled on/off in settings
-- Three modes:
-  - **Ice** (temp ≤5°C): Slippery, momentum-based
-  - **Wind** (high wind speed): Blown across screen
-  - **Flood** (heavy rain): Floats on water
-
----
-
-## 🎯 Backend Features
-
-### API Key Rotation System
-- **4 API Keys**: Round-robin distribution across multiple keys
-- **4× Capacity**: 240 calls/minute instead of 60
-- **Automatic Failover**: Exception handling for invalid keys
-- **Configuration-Based**: Keys stored in `.env`, not code
-
-### Caching Strategy
-- **10-Minute TTL**: Weather responses cached for 10 minutes
-- **80-90% Reduction**: Dramatically reduces API calls
-- **Sub-millisecond Response**: Cache hits return in <1ms
-- **Rate Limit Protection**: Fewer calls = lower chance of hitting limits
-
-### Security Features
-- **CSRF Protection**: Laravel's built-in middleware
-- **Password Hashing**: bcrypt with automatic salting
-- **SQL Injection Prevention**: Eloquent ORM uses parameter binding
-- **Input Validation**: All user input validated before processing
-- **Session Security**: HttpOnly cookies, secure sessions
-
-### Database Design
-- **Foreign Keys**: Proper relationships with cascade deletes
-- **Unique Constraints**: Email uniqueness, composite favorites constraint
-- **Indexes**: Optimized queries on frequently accessed columns
-- **Data Integrity**: Automatic cleanup when users are deleted
-
----
-
-## 🤝 Contributing
-
-This project is fully functional with:
-- ✅ Laravel 12 + Inertia.js backend
-- ✅ MySQL database with proper schema
-- ✅ Session-based authentication
-- ✅ API key rotation and caching
-- ✅ Production-ready security features
-
-Future enhancements planned:
-- Deploy to production server
-- Add email verification
-- Implement rate limiting middleware
-- Add API documentation (Swagger/OpenAPI)
-- Performance monitoring and analytics
+* **Van Renfred M. Otacan** — Frontend Lead & Physics Engine
+* **Angela Lois A. Calo** — Backend Architect & API Security
+* **Eian Gabriel Aguilar** — Database Specialist & DevOps Lead
 
 ---
 
 ## 📄 License
 
-Academic project - All rights reserved.
-
----
-
-## 🙏 Acknowledgments
-
-- **OpenWeather API** - Weather data provider
-- **Press Start 2P** - Retro font by CodeMan38
-- **Tailwind CSS** - Styling framework
-- **React Team** - Amazing library
-
----
-
-## 📞 Support
-
-For questions about this project:
-- Review the code comments - all components are well-documented
-- Check the inline documentation in controllers and services
-- Examine the component structure for implementation details
-
----
-
-## ⚠️ Important Notes
-
-### Files NOT Included in Repository
-- `.env` - Contains sensitive API keys and database credentials (create from `.env.example`)
-- `node_modules/` - Node.js dependencies (install with `npm install`)
-- `vendor/` - PHP dependencies (install with `composer install`)
-- `storage/logs/` - Application logs
-
-### Before Pushing to Repository
-1. ✅ Ensure `.env` is in `.gitignore` (should be by default)
-2. ✅ Never commit API keys or passwords
-3. ✅ Use `.env.example` as a template for required environment variables
-4. ✅ Run `php artisan config:clear` if you've changed config files
-
-### Production Deployment Checklist
-- [ ] Set `APP_ENV=production` and `APP_DEBUG=false` in `.env`
-- [ ] Generate new `APP_KEY` with `php artisan key:generate`
-- [ ] Run `php artisan config:cache` and `php artisan route:cache`
-- [ ] Set up proper database credentials
-- [ ] Configure proper session driver (Redis recommended)
-- [ ] Set up SSL/HTTPS certificates
-- [ ] Configure proper file permissions for `storage/` and `bootstrap/cache/`
+Academic project — developed for course evaluation and educational purposes.
