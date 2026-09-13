@@ -26,14 +26,14 @@ Do not copy milestone criteria into Progress or Backlog. Progress stores only `c
 | M3 | — | done | Weather API Integration |
 | M4 | — | done | UI & Weather Effects Engine (Core Features) |
 | M5 | — | done | Database Migration to Firebase |
-| M6 | — | active | Production Deployment & Polish |
-| M7 | — | planned | Additional Features |
+| M6 | — | done | Production Deployment & Polish |
+| M7 | — | active | Additional Features |
 
 ---
 
 ## Suggested sequence
 
-Execute M5 immediately to restore database functionality for the IT112 Kanban Lab submission, followed by M6.
+All core milestones M0 through M6 are complete. M7 remains for future feature additions.
 
 ---
 
@@ -52,7 +52,7 @@ Execute M5 immediately to restore database functionality for the IT112 Kanban La
 
 ## M6 — Production Deployment & Polish
 
-- **Status:** active
+- **Status:** done
 - **Objective:** Configure production environment variables and deploy to Vercel/VPS.
 - **Success criteria:**
   - Production build succeeds without errors.
@@ -61,8 +61,10 @@ Execute M5 immediately to restore database functionality for the IT112 Kanban La
 - **Children:** None
 - **Done when:** The application is live and accessible in production.
 
-### M7 — Additional Features
+---
 
-- **Status:** planned
+## M7 — Additional Features
+
+- **Status:** active
 - **Objective:** Email verification, rate limiting, API documentation, and performance monitoring.
 - **Notes:** Optional/stretch goals after the core requirements are met.
