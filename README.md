@@ -159,17 +159,6 @@ CLIM8BIT/
 
 ---
 
-## 👥 Authors
-
-**Caraga State University** — College of Computing and Information Sciences  
-*Course:* IT-112 Systems Integration and Architecture 1 (Section: BRFV1)
-
-* **Van Renfred M. Otacan** — Frontend Lead & Physics Engine
-* **Angela Lois A. Calo** — Backend Architect & API Security
-* **Eian Gabriel Aguilar** — Database Specialist & DevOps Lead
-
----
-
 ## 📄 License
 
 Academic project — developed for course evaluation and educational purposes.
